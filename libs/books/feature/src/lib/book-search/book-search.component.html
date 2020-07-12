@@ -4,6 +4,7 @@
         autoFocus
         matInput
         type="search"
+        aria-label="Search"
         placeholder="Search for books to add to your reading list"
         formControlName="term"
       />
@@ -14,13 +15,13 @@
   </form>
   
   <ng-container *ngIf="searchTerm; else empty">
-    <div class="book-grid">
-      <div class="book" data-testing="book-item" *ngFor="let b of books">
+    <div class="book-grid" role="list">
+      <div class="book" data-testing="book-item" *ngFor="let b of books" role="listitem">
         <div class="book--title">
           {{ b.title }}
         </div>
         <div class="book--content">
-          <div class="book--content--cover">
+          <div class="book--content--cover" role="figure">
             <img src="{{ b.coverUrl }}" />
           </div>
           <div class="book--content--info">
