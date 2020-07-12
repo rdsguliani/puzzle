@@ -73,10 +73,6 @@ export class ReadingListEffects implements OnInitEffects {
     )
   );
 
-  ngrxOnInitEffects() {
-    return ReadingListActions.loadReadingList();
-  }
-
   updateBook$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ReadingListActions.markAsRead),
@@ -100,6 +96,10 @@ export class ReadingListEffects implements OnInitEffects {
       })
     )
   );
+
+  ngrxOnInitEffects() {
+    return ReadingListActions.loadReadingList();
+  }
 
   constructor(private actions$: Actions, private http: HttpClient) {}
 }
