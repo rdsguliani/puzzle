@@ -73,10 +73,6 @@ export class ReadingListEffects implements OnInitEffects {
     )
   );
 
-  ngrxOnInitEffects() {
-    return ReadingListActions.loadReadingList();
-  }
-
   /** UNDO EFFECTS  */
   undoAddBook$ = createEffect(() =>
     this.actions$.pipe(
@@ -121,6 +117,10 @@ export class ReadingListEffects implements OnInitEffects {
       })
     )
   );
+
+  ngrxOnInitEffects() {
+    return ReadingListActions.loadReadingList();
+  }
 
   constructor(private actions$: Actions, private http: HttpClient) {}
 }
