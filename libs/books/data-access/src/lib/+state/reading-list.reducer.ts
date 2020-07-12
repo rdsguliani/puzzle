@@ -8,6 +8,7 @@ export const READING_LIST_FEATURE_KEY = 'readingList';
 
 export interface State extends EntityState<ReadingListItem> {
   loaded: boolean;
+  readBooks: {[prop: string]: string};
   error: null | string;
 }
 
@@ -23,6 +24,7 @@ export const readingListAdapter: EntityAdapter<ReadingListItem> = createEntityAd
 
 export const initialState: State = readingListAdapter.getInitialState({
   loaded: false,
+  readBooks: {},
   error: null
 });
 
@@ -52,7 +54,16 @@ const readingListReducer = createReducer(
   ),
   on(ReadingListActions.removeFromReadingList, (state, action) =>
     readingListAdapter.removeOne(action.item.bookId, state)
-  )
+  ),
+  on( ReadingListActions.markAsRead, (state, action) => {
+    const b = { ...action.item, finished: true, finishedDate: new Date().toISOString()}
+    const readBooks = {...state.readBooks, [b.bookId]: b.finishedDate};
+    return readingListAdapter.setOne(b, {
+      ...state,
+      readBooks
+    })
+  }
+),
 );
 
 export function reducer(state: State | undefined, action: Action) {
