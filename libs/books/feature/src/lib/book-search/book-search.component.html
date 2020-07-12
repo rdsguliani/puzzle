@@ -3,8 +3,8 @@
       <input
         autoFocus
         matInput
+        aria-label="search"
         type="search"
-        aria-label="Search"
         placeholder="Search for books to add to your reading list"
         formControlName="term"
       />
@@ -21,7 +21,7 @@
           {{ b.title }}
         </div>
         <div class="book--content">
-          <div class="book--content--cover" role="figure">
+          <div class="book--content--cover">
             <img src="{{ b.coverUrl }}" />
           </div>
           <div class="book--content--info">
@@ -55,4 +55,3 @@
       </p>
     </div>
   </ng-template>
-  

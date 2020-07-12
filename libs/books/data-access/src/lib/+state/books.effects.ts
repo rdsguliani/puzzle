@@ -9,16 +9,17 @@ import { Book } from '@tmo/shared/models';
 @Injectable()
 export class BooksEffects {
   searchBooks$ = createEffect(() => 
-    this.actions$.pipe( 
+    this.actions$.pipe(
       ofType(BooksActions.searchBooks),
       fetch({
-        run: (action) => {
+        run: action => {
           return this.http
             .get<Book[]>(`/api/books/search?q=${action.term}`)
             .pipe(
               map(data => BooksActions.searchBooksSuccess({ books: data }))
             );
         },
+
         onError: (action, error) => {
           console.error('Error', error);
           return BooksActions.searchBooksFailure({ error });
