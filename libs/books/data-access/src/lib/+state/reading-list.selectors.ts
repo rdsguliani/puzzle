@@ -41,3 +41,5 @@ export const getAllBooks = createSelector<
 export const getReadingList = createSelector(getReadingListState, selectAll);
 
 export const getTotalUnread = createSelector(getReadingListState, selectTotal);
+
+export const getNotification = createSelector(getReadingListState, (state) =>  state.recentAction );

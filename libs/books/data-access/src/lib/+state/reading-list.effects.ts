@@ -77,5 +77,50 @@ export class ReadingListEffects implements OnInitEffects {
     return ReadingListActions.loadReadingList();
   }
 
+  /** UNDO EFFECTS  */
+  undoAddBook$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ReadingListActions.undoAddToReadingList),
+      optimisticUpdate({
+        run: ({ item }) => {
+          return this.http.delete(`/api/reading-list/${item.bookId}`).pipe(
+            map(() =>
+              ReadingListActions.confirmedUndoAddToReadingList({
+                item
+              })
+            )
+          );
+        },
+        undoAction: ({ item }) => {
+          return ReadingListActions.failedUndoAddToReadingList({
+            item
+          });
+        }
+      })
+    )
+  );
+
+  undoRemoveBook$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ReadingListActions.undoRemoveFromReadingList),
+      optimisticUpdate({
+        run: ({ book }) => {
+          return this.http.post('/api/reading-list', book).pipe(
+            map(() =>
+              ReadingListActions.confirmedUndoRemoveFromReadingList({
+                book
+              })
+            )
+          );
+        },
+        undoAction: ({ book }) => {
+          return ReadingListActions.failedUndoRemoveFromReadingList({
+            book
+          });
+        }
+      })
+    )
+  );
+
   constructor(private actions$: Actions, private http: HttpClient) {}
 }
