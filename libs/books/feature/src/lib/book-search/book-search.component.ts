@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import {
   addToReadingList,
   clearSearch,
-  getAllBooks,
+  getAllBooksWithStatus,
   ReadingListBook,
   searchBooks
 } from '@tmo/books/data-access';
@@ -32,7 +32,7 @@ export class BookSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select(getAllBooks).subscribe(books => {
+    this.store.select(getAllBooksWithStatus).subscribe(books => {
       this.books = books;
     });
   }

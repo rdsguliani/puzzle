@@ -8,6 +8,19 @@
       <div class="reading-list-item--details--author">
         {{ b.authors.join(',') }}
       </div>
+      <div >
+          <mat-checkbox
+            class="reading-list-item--unread"
+            [attr.aria-label]="'Finished ' + b.title + ' from reading list'"
+            (change)="markAsRead(b)" *ngIf="!b.finished; else finished">
+             <strong> Mark as Read</strong>
+          </mat-checkbox>
+          <ng-template #finished >
+            <div class="reading-list-item--read">
+                <strong>Finished on: </strong> <span>{{ b.finishedDate }}</span>
+            </div>
+          </ng-template>
+      </div>
     </div>
     <div>
       <button
