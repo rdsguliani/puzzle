@@ -27,7 +27,7 @@ describe('NotificationService', () => {
       providers: [StoreModule]
     });
     // service = TestBed.inject(NotificationService);
-    service = new NotificationService((new MockSnackBar() as any), (new MockStore as any)); //NEED TO IMPROVE
+    service = new NotificationService((new MockSnackBar() as any), (new MockStore as any)); //can be done better by mocking the data
   });
 
   it('should be created', () => {
