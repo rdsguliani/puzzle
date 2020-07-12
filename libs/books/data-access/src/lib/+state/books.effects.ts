@@ -11,13 +11,10 @@ export class BooksEffects {
   searchBooks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BooksActions.searchBooks),
-      map(action => action.term),
-      debounceTime(500),
-      distinctUntilChanged(),
       fetch({
-        run: (term: any) => {
+        run: action => {
           return this.http
-            .get<Book[]>(`/api/books/search?q=${term}`)
+            .get<Book[]>(`/api/books/search?q=${action.term}`)
             .pipe(
               map(data => BooksActions.searchBooksSuccess({ books: data }))
             );
