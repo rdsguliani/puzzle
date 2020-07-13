@@ -4,7 +4,7 @@ Code Smells:
 
 1.  For search box, 
     a. search text is not trimmed with white spaces before rest call is made. 
-    b. application should remove extra spaces between the two words using regex/replace, so that there is not extra space between two words being searched.
+    b. application should remove extra spaces between the two words using regex, so that there is not extra space between two words being searched.
 
 2. While calling searchBooks() method on click of search button, application is using this.searchForm.value.term for null check and it is not trimmed search value, rather we should have a consistency and always get searchTxt from searchTerm getter as it will help to maintain consistency and reduce redundancy. for ex: writting regex for space in between and trim() extra white space.
 
