@@ -9,7 +9,6 @@ import {
 } from '@tmo/books/data-access';
 import { FormBuilder } from '@angular/forms';
 import { Book } from '@tmo/shared/models';
-import { Observable, of, iif } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
@@ -34,6 +33,7 @@ export class BookSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.subscribeToFormControl()
     this.store.select(getAllBooks).subscribe(books => {
       this.books = books;
     });
@@ -54,18 +54,20 @@ export class BookSearchComponent implements OnInit {
     this.searchBooks();
   }
 
-  searchBooks() {
-      of(this.searchTerm)
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-      ).subscribe(() => {
-        if (!!this.searchTerm) {
-          this.store.dispatch(searchBooks({ term: this.searchTerm }));
-        } else {
-          this.store.dispatch(clearSearch());
-        }
-      })
+  subscribeToFormControl() {
+    this.searchForm.controls.term.valueChanges.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+    ).subscribe( _ => {
+      this.searchBooks();
+    })
+  }
 
+  searchBooks() {
+    if (this.searchTerm) {
+      this.store.dispatch(searchBooks({ term: this.searchTerm}));
+    } else {
+      this.store.dispatch(clearSearch());
+    }
   }
 }
