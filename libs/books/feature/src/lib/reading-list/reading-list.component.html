@@ -1,5 +1,7 @@
 <ng-container *ngIf="(readingList$ | async).length > 0; else empty" role="list">
-  <div class="reading-list-item" *ngFor="let b of readingList$ | async" role="listitem">
+  <div class="reading-list-item"  role="listitem"
+       *ngFor="let b of readingList$ | async" 
+       data-testing="reading-list-item">
     <div role="figure">
       <img class="reading-list-item--cover" [src]="b.coverUrl" />
     </div>
@@ -8,18 +10,16 @@
       <div class="reading-list-item--details--author">
         {{ b.authors.join(',') }}
       </div>
-      <div >
-          <mat-checkbox
+      <div>
+          <mat-checkbox  data-testing="reading-list-read-checkbox"
             class="reading-list-item--unread"
             [attr.aria-label]="'Finished ' + b.title + ' from reading list'"
-            (change)="markAsRead(b)" *ngIf="!b.finished; else finished">
+            (change)="markAsRead(b)" *ngIf="!b.finished;">
              <strong> Mark as Read</strong>
           </mat-checkbox>
-          <ng-template #finished >
-            <div class="reading-list-item--read">
-                <strong>Finished on: </strong> <span>{{ b.finishedDate }}</span>
+            <div class="reading-list-item--read" *ngIf="b.finished">
+                <strong>Finished on: </strong> <span>{{ formatDate(b.finishedDate) }}</span>
             </div>
-          </ng-template>
       </div>
     </div>
     <div>

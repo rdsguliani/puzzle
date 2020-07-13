@@ -19,4 +19,11 @@ export class ReadingListComponent {
   markAsRead(item) {  
     this.store.dispatch(markAsRead({ item }));
   }
+
+  formatDate(date: void | string) {
+    return date
+      ? new Intl.DateTimeFormat('en-US').format(new Date(date))
+      : undefined;
+  }
+
 }
