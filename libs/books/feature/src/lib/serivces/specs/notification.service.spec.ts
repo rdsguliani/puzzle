@@ -20,7 +20,7 @@ class MockSnackBar {
 
 describe('NotificationService', () => {
   let service: NotificationService;
-  let store: MockStore = new MockStore();
+  const store: MockStore = new MockStore();
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [MatSnackBar, StoreModule.forRoot({})],

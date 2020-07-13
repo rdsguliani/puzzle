@@ -11,8 +11,7 @@ export class NotificationService {
   undoPerformed: boolean;
 
   constructor(private snackBar: MatSnackBar,
-    private readonly store: Store) {
-      
+    private readonly store: Store) { 
       this.subscribeToStore();
      }
 
@@ -30,7 +29,7 @@ export class NotificationService {
 
     openSnackBar(message: string) {
       const snackBarRef = this.snackBar.open(message, "Undo", {
-        duration: 3000,
+        duration: 10000,
       })
 
       snackBarRef.afterDismissed().subscribe(() => {
