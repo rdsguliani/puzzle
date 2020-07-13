@@ -45,3 +45,13 @@
   font-size: 1rem;
   color: $gray60;
 }
+
+.reading-list-item--read{
+  color: green;
+  margin-top: 4px;
+}
+
+.reading-list-item--unread{
+  color: darkslateblue;
+}
+
