@@ -38,6 +38,7 @@ const EXPORTS = [
   exports: [...EXPORTS],
   declarations: [...EXPORTS]
 })
+
 export class BooksFeatureModule {
   constructor(private _: NotificationService) {}
 }

@@ -12,10 +12,10 @@ export class NotificationService {
 
   constructor(private snackBar: MatSnackBar,
     private readonly store: Store) { 
-      this.subscribeToStore();
+      this.subscribeToNotification();
      }
 
-     subscribeToStore() {
+     subscribeToNotification() {
       this.store.select(getNotification)
       .pipe( 
         filter(item => !!item),
@@ -42,5 +42,4 @@ export class NotificationService {
         this.store.dispatch(undoRemoveFromReadingList({ book: this.selectedItem.item  }));
       });
     }
-
 }
