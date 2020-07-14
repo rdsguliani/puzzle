@@ -28,7 +28,7 @@ export class BookSearchComponent implements OnInit {
   ) {}
 
   get searchTerm(): string {
-    return this.searchForm.value.term;
+    return this.searchForm.value.term.trim();
   }
 
   ngOnInit(): void {
@@ -53,7 +53,7 @@ export class BookSearchComponent implements OnInit {
   }
 
   searchBooks() {
-    if (this.searchForm.value.term) {
+    if (!!this.searchTerm) {
       this.store.dispatch(searchBooks({ term: this.searchTerm }));
     } else {
       this.store.dispatch(clearSearch());

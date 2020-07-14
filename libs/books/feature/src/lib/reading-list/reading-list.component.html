@@ -1,6 +1,6 @@
-<ng-container *ngIf="(readingList$ | async).length > 0; else empty">
-  <div class="reading-list-item" *ngFor="let b of readingList$ | async">
-    <div>
+<ng-container *ngIf="(readingList$ | async).length > 0; else empty" role="list">
+  <div class="reading-list-item" *ngFor="let b of readingList$ | async" role="listitem">
+    <div role="figure">
       <img class="reading-list-item--cover" [src]="b.coverUrl" />
     </div>
     <div class="reading-list-item--details">
