@@ -20,7 +20,7 @@ export class BooksEffects {
             );
         },
 
-        onError: (action, error) => {
+        onError: (_, error) => {
           console.error('Error', error);
           return BooksActions.searchBooksFailure({ error });
         }
